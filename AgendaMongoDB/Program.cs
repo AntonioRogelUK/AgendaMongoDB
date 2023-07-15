@@ -28,7 +28,9 @@ Console.WriteLine(contactoEncontrado.ToString());
 
 Contacto contactoActualizado = new Contacto()
 {
-    Name = "Putter Virginio", Phone = "234567890",
+    Id = contactoEncontrado.Id,
+    Name = "Putter Virginio",
+    Phone = "234567890",
 };
 
 Update(contactoEncontrado.Id, contactoActualizado);
