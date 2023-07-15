@@ -22,7 +22,7 @@ contacto2.Phone= "1234567890";
 
 //Insert(contacto2);
 
-Contacto contactoEncontrado = FindByName("Putter");
+Contacto contactoEncontrado = FindByName("Putter Virginio");
 Console.WriteLine(contactoEncontrado.ToString());
 
 
@@ -37,11 +37,16 @@ Update(contactoEncontrado.Id, contactoActualizado);
 contactoEncontrado = FindById(contactoEncontrado.Id);
 Console.WriteLine(contactoEncontrado.ToString());
 
+Delete(contactoEncontrado.Id);
 
-//foreach (Contacto c in Get())
-//{
-//    Console.WriteLine(c.ToString());
-//}
+
+Console.WriteLine( );
+
+
+foreach (Contacto c in Get())
+{
+    Console.WriteLine(c.ToString());
+}
 
 void Insert(Contacto contacto)
 {
@@ -73,3 +78,14 @@ void Update(string id, Contacto contacto)
         collection.ReplaceOne(c => c.Id == ContactoActualizar.Id, contacto);
     }
 }
+
+void Delete(string id)
+{
+    Contacto contacto = FindById(id);
+    if (contacto != null)
+    {
+        collection.DeleteOne(c => c.Id == id);
+    }
+}
+
+
