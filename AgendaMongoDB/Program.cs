@@ -38,6 +38,7 @@ catch (Exception ex)
 
 List<Contacto> InsertarCsv(string archivo)
 {
+    List<Contacto> contactos = new List<Contacto>();
     if (Path.GetExtension(archivo) == ".csv")
     {
         string[] csv = File.ReadAllLines(archivo);
@@ -46,11 +47,24 @@ List<Contacto> InsertarCsv(string archivo)
         {
             if (!renglon.Contains("Name,DateBirth") && !string.IsNullOrWhiteSpace(renglon))
             {
+                //Expresion Regular!
                 string[] datos = Regex.Split(renglon, ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+
+                Contacto contacto = new Contacto();
+                contacto.Name = datos[0].Corregir();
+                contacto.DateBirth = Convert.ToDateTime(datos[1].Corregir());
+                contacto.Country = datos[2].Corregir();
+                contacto.State = datos[3].Corregir();
+                contacto.Address = datos[4].Corregir();
+                contacto.Email = datos[5].Corregir();
+                contacto.Phone = datos[6].Corregir();
+                contactos.Add(contacto);
             }
         }
+        collection.InsertMany(contactos);
     }
 
+    Console.WriteLine("Proceso Terminado");
     return new List<Contacto>();
 }
 
