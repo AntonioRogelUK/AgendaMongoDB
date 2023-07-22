@@ -11,4 +11,16 @@
     <PackageReference Include="MongoDB.Driver" Version="2.20.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\Database.rar">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\ExportCSV - 2023-07-16T172310.609.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\ExportJson - 2023-07-16T173446.395.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -10,6 +10,8 @@ namespace AgendaMongoDB
 {
     internal class Contacto
     {
+        //Name,DateBirth,Country,State,Address,Email,Phone
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; } = string.Empty;
@@ -17,8 +19,20 @@ namespace AgendaMongoDB
         [BsonElement("name")]
         public string Name { get; set; } = string.Empty;
 
+        [BsonElement("datebirth")]
+        public DateTime DateBirth { get; set; } = DateTime.MinValue;
+
+        [BsonElement("country")]
+        public string Country { get; set; } = string.Empty;
+
+        [BsonElement("state")]
+        public string State { get; set; } = string.Empty;
+
         [BsonElement("address")]
         public string Address { get; set; } = string.Empty;
+
+        [BsonElement("email")]
+        public string Email { get; set; } = string.Empty;
 
         [BsonElement("phone")]
         public string Phone { get; set; } = string.Empty;
@@ -26,7 +40,18 @@ namespace AgendaMongoDB
         //Sobreescribira el ToString
         public override string ToString()
         {
-            return $"El contacto {Name} con Id {Id} tiene el numero de telefono {Phone}.";
+            return $"El contacto {Name} tiene {CalcularEdad(DateBirth)} ({DateBirth}).";
+        }
+
+        private int CalcularEdad(DateTime fechaNacimiento)
+        {
+            int edad = DateTime.Now.Year - fechaNacimiento.Year;
+            if (DateTime.Now.Month < fechaNacimiento.Month || 
+                (DateTime.Now.Month == fechaNacimiento.Month && DateTime.Now.Day < fechaNacimiento.Day)) 
+            {
+                edad--;
+            }
+            return edad;
         }
     }
 }
