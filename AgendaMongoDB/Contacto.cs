@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AgendaMongoDB
 {
-    internal class Contacto
+    public class Contacto
     {
         //Name,DateBirth,Country,State,Address,Email,Phone
 

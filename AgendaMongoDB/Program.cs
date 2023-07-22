@@ -26,7 +26,7 @@ try
     foreach (var archivo in archivos)
     {
         //Console.WriteLine(archivo); 
-        InsertarCsv(archivo);
+        InsertarJson(archivo);
     }
 }
 catch (Exception ex)
@@ -61,6 +61,20 @@ List<Contacto> InsertarCsv(string archivo)
                 contactos.Add(contacto);
             }
         }
+        collection.InsertMany(contactos);
+    }
+
+    Console.WriteLine("Proceso Terminado");
+    return new List<Contacto>();
+}
+
+List<Contacto> InsertarJson(string archivo)
+{
+    List<Contacto> contactos = new List<Contacto>();
+    if (Path.GetExtension(archivo) == ".json")
+    {
+        string json = File.ReadAllText(archivo);
+        contactos = Newtonsoft.Json.JsonConvert.DeserializeObject<JsonData>(json)!.objects;
         collection.InsertMany(contactos);
     }
 
