@@ -27,6 +27,7 @@ try
     {
         //Console.WriteLine(archivo); 
         InsertarJson(archivo);
+        InsertarCsv(archivo);
     }
 }
 catch (Exception ex)
