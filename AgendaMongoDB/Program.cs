@@ -1,5 +1,6 @@
 ﻿using AgendaMongoDB;
 using MongoDB.Driver;
+using System.Text.RegularExpressions;
 
 //Conectar a la base de datos
 MongoClient client = new MongoClient("mongodb://localhost:27017");
@@ -24,7 +25,8 @@ try
 
     foreach (var archivo in archivos)
     {
-        Console.WriteLine(archivo); 
+        //Console.WriteLine(archivo); 
+        InsertarCsv(archivo);
     }
 }
 catch (Exception ex)
@@ -34,6 +36,23 @@ catch (Exception ex)
 
 }
 
+List<Contacto> InsertarCsv(string archivo)
+{
+    if (Path.GetExtension(archivo) == ".csv")
+    {
+        string[] csv = File.ReadAllLines(archivo);
+
+        foreach (string renglon in csv)
+        {
+            if (!renglon.Contains("Name,DateBirth") && !string.IsNullOrWhiteSpace(renglon))
+            {
+                string[] datos = Regex.Split(renglon, ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+            }
+        }
+    }
+
+    return new List<Contacto>();
+}
 
 
 
